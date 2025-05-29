@@ -13,5 +13,20 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  api:
+    build: .
+    container_name: nest-api-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: lucas
+      DATABASE_PASSWORD: lucas123
+      DATABASE_NAME: lucasDatabase
+    command: npm run start:prod
+
 volumes:
   pgdata:

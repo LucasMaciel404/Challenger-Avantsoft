@@ -1,18 +1,19 @@
-import { IsOptional, IsString, IsNumber, Min, IsUUID } from 'class-validator';
-import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsNumber, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
-  @ApiPropertyOptional({ example: '123e4567-e89b-12d3-a456-426614174000' })
-  @IsOptional()
-  @IsUUID()
-  sku?: string;
-
-  @ApiProperty({ example: 'Camiseta Preta' })
+  @ApiProperty({ example: 'SKU12345' })
   @IsString()
+  @IsNotEmpty({ message: 'O SKU não pode ser vazio' })
+  sku: string;
+
+  @ApiProperty({ example: 'Camiseta Branca' })
+  @IsString()
+  @IsNotEmpty({ message: 'O nome não pode ser vazio' })
   name: string;
 
-  @ApiProperty({ example: 49.9 })
+  @ApiProperty({ example: 59.9 })
   @IsNumber()
-  @Min(0)
+  @Min(0.01, { message: 'O preço deve ser maior que 0' })
   price: number;
 }

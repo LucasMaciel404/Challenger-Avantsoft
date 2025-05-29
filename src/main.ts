@@ -16,8 +16,8 @@ async function bootstrap() {
   );
   
   const config = new DocumentBuilder()
-    .setTitle('Minha API')
-    .setDescription('Documentação da API com Swagger')
+    .setTitle('Avantsoft API')
+    .setDescription('API para gerenciamento de produtos')
     .setVersion('1.0')
     .build();
 

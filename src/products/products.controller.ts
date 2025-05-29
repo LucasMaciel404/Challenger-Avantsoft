@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus, ParseIntPipe } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -12,7 +12,11 @@ export class ProductsController {
 
   @Post()
   @ApiOperation({ summary: 'Criar um novo produto' })
-  @ApiResponse({ status: 201, description: 'Produto criado com sucesso', type: Product })
+  @ApiResponse({
+    status: 201,
+    description: 'Produto criado com sucesso',
+    type: Product,
+  })
   create(@Body() dto: CreateProductDto) {
     return this.productsService.create(dto);
   }
@@ -24,28 +28,28 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  @Get(':sku')
-  @ApiOperation({ summary: 'Buscar produto por SKU' })
-  @ApiParam({ name: 'sku', type: 'string' })
+  @Get(':id')
+  @ApiOperation({ summary: 'Buscar produto por ID' })
+  @ApiParam({ name: 'id', type: 'number' })
   @ApiResponse({ status: 200, type: Product })
-  findOne(@Param('sku') sku: string) {
-    return this.productsService.findOne(sku);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.findOne(id);
   }
 
-  @Put(':sku')
-  @ApiOperation({ summary: 'Atualizar produto por SKU' })
-  @ApiParam({ name: 'sku', type: 'string' })
+  @Put(':id')
+  @ApiOperation({ summary: 'Atualizar produto por ID' })
+  @ApiParam({ name: 'id', type: 'number' })
   @ApiResponse({ status: 200, type: Product })
-  update(@Param('sku') sku: string, @Body() dto: UpdateProductDto) {
-    return this.productsService.update(sku, dto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateProductDto) {
+    return this.productsService.update(id, dto);
   }
 
-  @Delete(':sku')
+  @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Deletar produto por SKU' })
-  @ApiParam({ name: 'sku', type: 'string' })
+  @ApiOperation({ summary: 'Deletar produto por ID' })
+  @ApiParam({ name: 'id', type: 'number' })
   @ApiResponse({ status: 204 })
-  remove(@Param('sku') sku: string) {
-    return this.productsService.remove(sku);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.remove(id);
   }
 }
