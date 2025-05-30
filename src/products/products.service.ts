@@ -43,7 +43,6 @@ export class ProductsService {
   }
 
   async update(id: number, data: UpdateProductDto): Promise<Product> {
-    await this.validateSku(data.sku);
 
     const product = await this.findOne(id);
 
