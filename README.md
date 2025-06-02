@@ -17,7 +17,7 @@ Certifique-se de ter o Node.js (v18+), npm e Docker instalados em sua máquina.
 
 1. Clone o repositório
 ```
-https://github.com/LucasMaciel404/Challenger-Avantsoft
+git clone https://github.com/LucasMaciel404/Challenger-Avantsoft-API.git
 cd Challenger-Avantsoft
 ```
 2. Instale as dependências
@@ -35,7 +35,6 @@ DB_NAME=lucasDatabase
 
 ```
 4. Rode a aplicação
-arduino
 ```
 npm run start:dev
 ```
